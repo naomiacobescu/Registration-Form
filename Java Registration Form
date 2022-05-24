@@ -1,0 +1,132 @@
+
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.*;
+
+public class Problema3 extends JFrame implements ActionListener{
+JLabel label;
+JFormattedTextField nume,prenume;
+JSpinner an;
+JComboBox facultate,curs;
+JCheckBox buget,taxa;
+JTextArea textArea;
+
+public Problema3() {
+	super("Formular Inregistrare");
+	this.setSize(600,600);
+	this.setLayout(null);
+	JLabel tf = new JLabel("Nume");
+	tf.setBounds(5,10,50,30);
+	this.add(tf);
+	
+	nume = new JFormattedTextField("");
+	nume.setBounds(100,10,100,30);
+	this.add(nume);
+	
+	
+	tf = new JLabel("Prenume");
+	tf.setBounds(5,60,100,30);
+	this.add(tf);
+	prenume = new JFormattedTextField("");
+	prenume.setBounds(100,60,100,30);
+	this.add(prenume);
+	
+	tf = new JLabel("An de studiu");
+	tf.setBounds(5,110,100,20);
+	this.add(tf);
+	an = new JSpinner(new SpinnerNumberModel(1, 1, 4, 1)); 
+	an.setBounds(100,110,50,20);
+	this.add(an);
+	
+	
+	tf = new JLabel("Facultate");
+	tf.setBounds(5,160,100,20);
+	this.add(tf);
+
+	String[] listaFacultati = {"Facultatea de Electronica, Telecomunicații si Tehnologia Informației",
+			"Facultatea de Automatică și Calculatoare",
+			"Facultatea de Arhitectură și Urbanism",
+			"Facultatea de Autovehicule Rutiere, Mecatronică si Mecanică",
+			"Facultatea de Construcții",
+			"Facultatea de Construcții de Mașini",
+			"Facultatea de Ingineria Materialelor și a Mediului",
+			"Facultatea de Inginerie Electrică",
+			"Facultatea de Instalații"};
+	
+	facultate = new JComboBox(listaFacultati);
+	facultate.setBounds(100,160,415,20);
+	this.add(facultate);
+	
+	
+	tf = new JLabel("Curs");
+	tf.setBounds(5,210,100,20);
+	this.add(tf);
+	String[] listaCursuri= {"Fizica",
+			"Programare",
+			"Bazele Electrotehnicii",
+			"Dispozitive Electronice",
+			"Componente electronice fundamentale",
+			"Algebra Liniara",
+			"Matematici Speciale",
+			"Componente Integrate Digitale"};
+	curs = new JComboBox(listaCursuri);
+	curs.setBounds(100,210,230,20);
+	this.add(curs);
+	
+	tf = new JLabel("Finantare");
+	tf.setBounds(5,250,100,20);
+	this.add(tf);
+	buget = new JCheckBox("buget",false);
+	buget.setBounds(70,250,80,20);
+	taxa = new JCheckBox("taxa",false);
+	taxa.setBounds(170,250,80,20);
+	this.add(buget);
+	this.add(taxa);
+	
+	
+	JButton button = new JButton("Inregistreaza-te!");
+	button.setBounds(50,300,140,40);
+	button.addActionListener(this);
+	this.add(button);
+	
+	
+	textArea = new JTextArea(30,30);
+	textArea.setBounds(5,350,500,250);
+	textArea.setBackground(Color.white);
+	this.add(textArea);
+	this.setVisible(true);
+	this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	this.setLocationRelativeTo(null);
+}
+	public static void main(String[] args) {
+			Problema3  ob = new Problema3();
+
+	}
+
+	public void actionPerformed(ActionEvent e) {
+	  boolean ch1 = buget.isSelected(), ch2 = taxa.isSelected();
+	  if(nume.getText().compareTo("") == 0)
+		  textArea.setText("Introdu un nume.");
+	  else if(prenume.getText().compareTo("") == 0)
+		  textArea.setText("Introdu un prenume.");
+	  else
+	  if(ch1 == true && ch2 == true)
+		  textArea.setText("Nu ai voie sa selectezi decat un singur tip de finantare.");
+	  else if(ch1 == false && ch2 == false)
+		  textArea.setText("Trebuie sa selectezi obligatoriu un tip de finantare.");
+	  else {
+		  String finalString = new String();
+		  finalString+="Nume: " + nume.getText() + "\n";
+		  finalString+="Prenume: " + prenume.getText() + "\n";
+		  finalString+="An de studiu: " + String.valueOf(an.getValue()) + "\n";
+		  finalString+="Facultate: " + facultate.getSelectedItem().toString() + "\n";
+		  finalString+="Curs: " + curs.getSelectedItem().toString();
+		  textArea.setText(finalString);
+	  }
+	}
+
+
+}
